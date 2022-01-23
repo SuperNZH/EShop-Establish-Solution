@@ -157,11 +157,11 @@
     Macaw::get('/order/plist', 'home\Order@plist');   // 查询订单
 
 
-//    //后台卖家查询和处理定单
-//    Macaw::get('/admin/order', 'admin\Order@index');
-//    Macaw::get('/admin/order/del/(:num)', 'admin\Order@del');
-//    Macaw::get('/admin/order/mod/(:num)', 'admin\Order@mod');
-//    Macaw::post('/admin/order/doupdate', 'admin\Order@doupdate');
-//    Macaw::any('/admin/order/state/(:num)', 'admin\Order@state');
+    //后台卖家查询和处理定单
+    Macaw::get('/admin/order', 'admin\Order@index');
+    Macaw::get('/admin/order/del/(:num)', 'admin\Order@del');
+    Macaw::get('/admin/order/mod/(:num)', 'admin\Order@mod');
+    Macaw::post('/admin/order/doupdate', 'admin\Order@doupdate');
+    Macaw::any('/admin/order/state/(:num)', 'admin\Order@state');
 
     Macaw::dispatch();

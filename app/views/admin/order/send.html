@@ -10,10 +10,10 @@
 <form  method="post" action="/admin/order/state/3?id={{order_id}}">
 <table style="width:400px;margin:0;" border="0" cellspacing="0" cellpadding="0" class="wenzhang">
 <tr>
-	<td align="right" class="bg_f8" width="100">快递公司：</td>
+	<td align="right" class="bg_f8" width="100">Express Company</td>
 	<td>
 		<select name="wlname" class="inputselect">
-		<option value="">无需快递</option>
+		<option value="">- No Need -</option>
 		{% for v in wllist %}
 		<option value="{{v}}">{{v}}</option>
 		{% endfor %}
@@ -21,14 +21,14 @@
 	</td>
 </tr>
 <tr>
-	<td align="right" class="bg_f8">快递单号：</td>
+	<td align="right" class="bg_f8">Courier Number</td>
 	<td><input type="text" name="wlid" class="inputall input200" /></td>
 </tr>
 <tr>
 	<td class="bg_f8">&nbsp;</td>
 	<td>
 		<input type="hidden" name="do_submit" />
-		<input type="button" value="发 货" class="tjbtn" />
+		<input type="button" value="Ship!" class="tjbtn" />
 	</td>
 </tr>
 </table>
@@ -37,7 +37,7 @@
 $(function(){
 $(":button").click(function(){
 	if ($(":input[name='wlname']").val() != '' && $(":input[name='wlid']").val() == '') {
-		alert('物流编号必须填写');
+		alert('The Logistics number must be filled in!');
 		return false;
 	}
 	$("form").submit();

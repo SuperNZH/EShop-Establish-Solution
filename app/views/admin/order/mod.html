@@ -1,178 +1,189 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>ewshop后台管理 - 修改订单</title>
-	<link type="text/css" rel="stylesheet" href="../../app/views/admin/resource/css/style.css" />
-	<script type="text/javascript" src="../../app/views/public/js/jquery.js"></script>
-	<script type="text/javascript" src="../../app/views/public/js/global.js"></script>
-</head>
-<div class="bgimg"></div>
-<div class="pagetop">
-	<div class="head">
-		<div class="logo fl"><img src="../../app/views/admin/resource/images/logo.png" /></div>
-
-		<div class="admin_t fr">
-			<ul>
-				<li><a href="/"><img border=0 src="../../app/views/admin/resource/images/exit4.gif"></a></li>
-				<li><a href="/admin/login/logout" onclick="return confirm('你确定要退出系统吗？')" ><img border=0 src="../../app/views/admin/resource/images/exit3.gif"></a></li>
-			</ul>
-		</div>
-
-		<div class="admin_u fr">
-			<b>欢迎您-</b><a title="" target="_top" href="">admin</a>&nbsp;【超级管理员】 &nbsp;&nbsp;
-		</div>
-		<div class="clear"></div>
-	</div>
-</div>
-<div class="content">
-	<div class="main">
-		<div class="left">
-			<div class="fenlei">
-				<h3>商品管理</h3>
-				<ul>
-
-					<li  ><a href="/admin/category">商品分类</a></li>
-
-					<li  ><a href="/admin/product">商品列表</a></li>
-
-					<li  ><a href="/admin/ask">商品咨询</a></li>
-
-					<li  ><a href="/admin/comment">商品评价</a></li>
-				</ul>
-			</div>
-			<div class="fenlei">
-				<h3>交易管理</h3>
-				<ul>
-
-					<li  class="sel"  ><a href="/admin/order">订单管理</a></li>
-
-					<li  ><a href="/admin/payway">支付方式</a></li>
-				</ul>
-			</div>
-			<div class="fenlei">
-				<h3>信息管理</h3>
-				<ul>
-
-					<li  ><a href="/admin/aclass">文章分类</a></li>
-
-					<li  ><a href="/admin/article?cid=0">文章列表</a></li>
-
-					<li  ><a href="/admin/page">单页列表</a></li>
-				</ul>
-			</div>
-			<div class="fenlei">
-				<h3>用户管理</h3>
-				<ul>
-
-					<li  ><a href="/admin/user">会员列表</a></li>
-
-					<li  ><a href="/admin/adminuser">管理列表</a></li>
-				</ul>
-			</div>
-			<div class="fenlei">
-				<h3>控制面板</h3>
-				<ul>
-
-					<li  ><a href="/admin/setting">基本信息</a></li>
-
-					<li  ><a href="/admin/link">友情链接</a></li>
-
-					<li  ><a href="/admin/ad">广告列表</a></li>
-				</ul>
-			</div>
-		</div>
+{% include "public/header.html"%}
 
 		<div class="right">
 			<div class="huiyuan_main">
-				<h3 class="hy_rtt c666">订单编号： 2008170016</h3>
+				<h3 class="hy_rtt c666">Order Reference： {{id}}</h3>
 				<div class="mat5 font13 zt">
-					<p class="c666"><span class="font12">2020-08-21：</span><span class="cgreen">订单创建成功</span>，订单编号：2008170016</p>
+					<p class="c666"><span class="font12">{{atime|date('Y-m-d H:i')}}：</span><span class="cgreen">Order Created</span>, Order Reference：{{id}}</p>
+					{# Pay on delivery #}
+				{% if payway == 3 %}
+					{% if state == 1 %}
+					<p class="cred mat5 font12">Waiting for the seller to deliver the goods</p>
+					<a class="shouhuo_btn" href="/admin/order/state/3?id={{id}}" onclick="return bro_dialog(this, 'Fill in the express information')">Ship</a>
+					{% elseif state == 3%}
+					<p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">The seller has sent the goods</span>, Order Reference：[{{wlid}}],
+						{% if wlname !=null %} {{wlname}} {% else %} No Need Express {%endif%}
+					</p>
+
+					<p class="c666 mat5"> Waiting for the buyer to pay
+						<a class="pay_btn" href="/admin/order/state/2?id={{id}}" onclick="return confirm('Are you sure you have been paid?')">Payment</a>
+					</p>
+
+					{% elseif state == 4 %}
+					<p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">The seller has sent the goods</span>, Order Reference：[{{wlid}}],
+						{% if wlname !=null %} {{wlname}} {% else %} No need Express {%endif%}</p>
+					<p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">Buyer paid successfully</span>, Payment Amount： ￥{{money}}</p>
+					<p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen strong">Order completed, welcome to visit next time!</span></p>
+					{% endif %}
+					{# Pay before delivery #}
+				{% elseif payway == 2%}
+					{% if state == 1 %}
+					<p class="c666 mat5"> Waiting for the buyer to pay
+						<a class="pay_btn" href="/admin/order/state/2?id={{id}}" onclick="return confirm('Are you sure you have been paid?')">Pay</a>
+					</p>
+					{% elseif state == 2%}
+					<p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">Buyer paid successfully</span>, Payment Amount： ￥{{money}}</p>
+					<p class="cred mat5 font12">Waiting for the seller to deliver the goods</p>
+					<a class="shouhuo_btn" href="/admin/order/state/3?id={{id}}" onclick="return bro_dialog(this, 'Fill in the express information')">Ship</a>
+
+					{% elseif state == 3%}
+						<p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">Buyer paid successfully</span>, Payment Amount： ￥{{money}}</p>
+						<p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">The seller has sent the goods</span>, Order Reference：[{{wlid}}],
+						{% if wlname !=null %} {{wlname}} {% else %} No need express {%endif%}</p>
+						<p class="cred mat5 font12">Waiting for buyer confirmation</p>
+
+					{% elseif state == 4%}
+					<p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">Buyer paid successfully</span>, Payment Amount： ￥{{money}}</p>
+
+					<p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">The seller has sent the goods</span>, Order Reference：[{{wlid}}],
+						{% if wlname !=null %} {{wlname}} {% else %} No need express {%endif%}</p>
+					<p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen strong">Order completed, welcome to visit next time!</span></p>
+
+
+					{% endif %}
+
+					{% elseif payway == 1%}
+
+				{% endif %}
+
+
+
+
+
+
+
+
 					<!--货到付款-->
-					<p class="c666 mat5"><span class="font12">2020-08-21：</span><span class="cgreen">买家付款成功</span>，支付金额：108.0元</p>
-					<p class="c666 mat5"><span class="font12">2020-08-21：</span><span class="cgreen">卖家已经发货</span>，运单编号7790507（顺丰快递 ）</p>
-					<p class="c666 mat5"><span class="font12">2020-08-21：</span><span class="cgreen strong">订单交易成功，欢迎下次光临！</span></p>
+
 					<div class="clear"></div>
 				</div>
 				<form method="post" action="/admin/order/doupdate">
-					<input type="hidden" name="id" value="2008170016">
+					<input type="hidden" name="id" value="{{id}}">
 					<div class="hy_table" style="margin-top:10px;">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="hy_tb_tt1">
 							<tr>
-								<td class="bg_f8 font12" width="">商品详情</td>
-								<td class="bg_f8 font12" width="120">商品单价(元)</td>
-								<td class="bg_f8 font12" width="120">购买数量</td>
+								<td class="bg_f8 font12" width="">Products</td>
+								<td class="bg_f8 font12" width="120">Unit Price</td>
+								<td class="bg_f8 font12" width="120">Quantity</td>
 							</tr>
 						</table>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-left:1px solid #ddd;">
 
+							{% for v in product_list %}
 							<tr>
 								<td style="text-align:left;">
 									<div class="dingdan_list">
-										<a href="/product/898" target="_blank" class="fl mar5"><img src="../../uploads/product/2020-0820-5f3e059c25d7b.png" width="45" height="45"></a>
+										<a href="/product/{{v.pid}}" target="_blank" class="fl mar5"><img src="{{res}}/product/{{v.plogo}}" width="45" height="45"></a>
 										<div class="fl font12">
-											<a href="/product/898"  title="《细说PHP》第4版" target="_blank" class="cblue dd_name">《细说PHP》第4版</a>
+											<a href="/product/{{v.pid}}"  title="{{v.pname}}" target="_blank" class="cblue dd_name">{{v.pname}}</a>
 
 										</div>
 										<div class="clear"></div>
 									</div>
 								</td>
-								<td width="110"><span class="num strong font14">108.0</span></td>
-								<td width="100"><span class="num font14">1</span></td>
+								<td width="110"><span class="num strong font14"><small>￥</small>{{v.pmoney}}</span></td>
+								<td width="100"><span class="num font14">{{v.pnum}}</span></td>
 							</tr>
+							{% endfor %}
+
 						</table>
 						<div class="ddxq_je font13">
-							应付总额：<span class="strong num1 font18 cred strong" id="order_money">108.0</span>(元) ＝
-							<span class="font14 cred num strong">108.0</span>(商品总额)
-							＋ <span class="font14 cred num strong">0.0</span>(运费)
+							{% if state != 1 %}
+							Total Price：<span class="strong num1 font18 cred strong" id="order_money">{{money}}</span>(￥) ＝
+							<span class="font14 cred num strong">{{productmoney}}</span>(Products)
+							＋ <span class="font14 cred num strong">{{wlmoney}}</span>(Express Fee)
+							{% else %}
+							Total Price：<span class="strong num1 font18 cred strong" id="order_money">{{money}}</span>(￥) ＝
+							<input  name="productmoney" value="{{productmoney}}" class="inputtext input80" />(Products)
+							＋ <input  name="wlmoney" value="{{wlmoney}}"  class="inputtext input60" />(Express Fee)
+							{% endif %}
 						</div>
 					</div>
 					<div class="hy_table3">
-						<h3>收货信息</h3>
+						<h3>Receipt Information</h3>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td style="text-align:right" width="105">会员帐号：</td>
-								<td style="text-align:left">user001（ID：6）</td>
+								<td style="text-align:right" width="105">Account：</td>
+								<td style="text-align:left">{% if uid != 0 %} {{uname}} (ID: {{uid}})  {% else %} <span class="c888"> Unlogged User </span>  {% endif %}</td>
 							</tr>
 							<tr>
-								<td style="text-align:right">付款方式：</td>
+								<td style="text-align:right">Payment：</td>
 								<td style="text-align:left">
-									转账付款
-								</td>
-							</tr>
-							<tr>
-								<td style="text-align:right">收货姓名：</td>
-								<td style="text-align:left">
-									高洛峰
-								</td>
-							</tr>
-							<tr>
-								<td style="text-align:right">联系电话：</td>
-								<td style="text-align:left">
-									15801484883
-								</td>
-							</tr>
-							<tr>
-								<td style="text-align:right">收货地址：</td>
-								<td style="text-align:left" colspan="3">
-									北京市北京市北京市海淀区中关村软件园二期
-								</td>
-							</tr>
-							<tr>
-								<td style="text-align:right">买家留言：</td>
-								<td style="text-align:left" colspan="3">
 
+									{% if state == 1 %}
+									<select name="payway" id="" class="inputselect">
+										{% for k,v in cache_payway %}
+											<option value="{{k}}"   {{ k == payway ? 'selected' : '' }}>{{v.name}}</option>
+										{% endfor %}
+									</select>
+
+									{% else %}
+
+										{{paywayarr[payway]}}
+									{% endif %}
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:right">Consignee：</td>
+								<td style="text-align:left">
+									{% if state == 4 %}
+										{{utname}}
+									{% else %}
+									<input type="text" name="utname" value="{{utname}}" class="inputall input150">
+									{% endif %}
+
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:right">Phone：</td>
+								<td style="text-align:left">
+									{% if state == 4 %}
+										{{uphone}}
+									{% else %}
+									<input type="text" name="uphone" value="{{uphone}}" class="inputall input150">
+									{% endif %}
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:right">Address：</td>
+								<td style="text-align:left" colspan="3">
+									{% if state == 4 %}
+									{{uaddress}}
+									{% else %}
+									<input type="text" name="uaddress" value="{{uaddress}}" class="inputall input500">
+									{% endif %}
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align:right">Buyer Notes：</td>
+								<td style="text-align:left" colspan="3">
+									{{content}}
 								</td>
 							</tr>
 						</table>
 					</div>
+					{% if state != 4 %}
+					<div class="mat10 center">
+						<input type="submit" name="do_submit" value="Edit" class="tjbtn">
+					</div>
+
+					{% endif %}
 				</form>
 			</div>
 			<div class="clear"></div>
 		</div>
-		<script charset="utf-8" src="../../app/views/public/js/plugin/artdialog/jquery.artDialog.js?skin=chrome"></script>
-		<script charset="utf-8" src="../../app/views/public/js/plugin/artdialog/plugins/iframeTools.js"></script>
+		<script charset="utf-8" src="{{public}}/js/plugin/artdialog/jquery.artDialog.js?skin=chrome"></script>
+		<script charset="utf-8" src="{{public}}/js/plugin/artdialog/plugins/iframeTools.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				$(":input[name='productmoney']").add(":input[name='wlmoney']").keyup(function(){
@@ -188,28 +199,5 @@
 				})
 			})
 		</script>
-		<div class="clear"></div>
-	</div>
-	<div class="foot">Copyright <span class="num">&copy;</span> 2018-2021 <a target="_blank" href="http://www.broshop.com">学习猿地 - <b>eduwork</b></a> 版权所有</div>
-</div>
-
-<script type="text/javascript">
-	$(function(){
-		$(".list").find("tr").hover(
-				function(){
-					if ($(this).find("td").hasClass("bgtt")) return;
-					$(this).find("td").css("background-color", "#ffffdd");
-				},
-				function(){
-					if ($(this).find("td").hasClass("bgtt")) return;
-					$(this).find("td").css("background-color", "#fff");
-				}
-		)
-	})
-</script>
-
-
-
-</body>
-</html>
+{% include "public/footer.html"%}
 

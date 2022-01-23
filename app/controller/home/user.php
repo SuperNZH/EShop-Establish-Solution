@@ -171,13 +171,13 @@
             }
 
 
-            $this->assign('paywayarr', ['1'=>'支付宝', '2'=>'转账付款', '3'=>'货到付款']);
+            $this->assign('paywayarr', ['1'=>'Alipay', '2'=>'Bank Transfer', '3'=>'Cash on Delivery']);
 
             // 将数据分给模版
             $this->assign('data', $data);
             $this->assign('fpage', $paginator);
 
-            $this->assign('title', '我的订单');
+            $this->assign('title', 'My Order');
             $this->assign('get', 'order');
             $this->display('user/order');
         }

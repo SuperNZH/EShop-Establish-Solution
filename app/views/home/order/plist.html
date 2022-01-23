@@ -21,37 +21,37 @@
             <span class="cgreen">Order Placed</span>[{{atime|date('Y-m-d H:i')}}] →
             <!--货到付款-->
 
-            {# 货到付款 #}
+            {# Cash on delivery #}
             {% if payway == 3 %}
             {% if state == 1 %}
-            <span class="cred">等待卖家发货</span>
+            <span class="cred">Pending Delivery</span>
             {% elseif state == 3%}
-            <span class="cgreen">已发货</span>[{{stime|date('Y-m-d H:i')}}] →
+            <span class="cgreen">Seller has Sent</span>[{{stime|date('Y-m-d H:i')}}] →
 
-            <span class="cgreen">等待买家付款</span>
+            <span class="cgreen">Waiting Payment</span>
 
 
             {% elseif state == 4 %}
 
-             <span class="cgreen">已发货</span>[{{stime|date('Y-m-d H:i')}}] →
-             <span class="cgreen">已付款</span>[{{ptime|date('Y-m-d H:i')}}] →
-             <span class="cred">交易成功</span>
+             <span class="cgreen">Sent</span>[{{stime|date('Y-m-d H:i')}}] →
+             <span class="cgreen">Paid</span>[{{ptime|date('Y-m-d H:i')}}] →
+             <span class="cred">Order Completed</span>
             {% endif %}
-            {# 先款后货 #}
+            {# Pay after delivery #}
             {% elseif payway == 2%}
             {% if state == 1 %}
-            <span class="cgreen">等待买家付款</span>
+            <span class="cgreen">Pending Payment</span>
             {% elseif state == 2%}
-            <span class="cgreen">已付款</span>[{{ptime|date('Y-m-d H:i')}}] →
-            <span class="cred">等待卖家发货</span>
+            <span class="cgreen">Paid</span>[{{ptime|date('Y-m-d H:i')}}] →
+            <span class="cred">Pending Delivery</span>
             {% elseif state == 3%}
-            <span class="cgreen">已付款</span>[{{ptime|date('Y-m-d H:i')}}] →
-            <span class="cgreen">已发货</span>[{{stime|date('Y-m-d H:i')}}] →
-            <span class="cgreen">等待买家确认</span>
+            <span class="cgreen">Paid</span>[{{ptime|date('Y-m-d H:i')}}] →
+            <span class="cgreen">Seller has sent</span>[{{stime|date('Y-m-d H:i')}}] →
+            <span class="cgreen">Pending Confirm</span>
             {% elseif state == 4%}
-            <span class="cgreen">已发货</span>[{{stime|date('Y-m-d H:i')}}] →
-            <span class="cgreen">已付款</span>[{{ptime|date('Y-m-d H:i')}}] →
-            <span class="cred">交易成功</span>
+            <span class="cgreen">Seller has sent</span>[{{stime|date('Y-m-d H:i')}}] →
+            <span class="cgreen">Paid</span>[{{ptime|date('Y-m-d H:i')}}] →
+            <span class="cred">Order Completed</span>
 
             {% endif %}
 
@@ -60,21 +60,21 @@
             {% endif %}
 
         </p>
-        <h3>商品名称</h3>
+        <h3>Products List</h3>
         {% for v in product_list %}
         <p><a href="/product/{{v.pid}}" title="{{v.pname}}" target="_blank" class="cblue">{{v.pname}}</a>　
             <span class="num"><small>￥</small>{{v.pmoney}}</span>(×{{v.pnum}})</p>
         {% endfor %}
-        <h3>物流信息</h3>
+        <h3>Logistics Information</h3>
         <p class="mat5">
-            物流公司：{{wlname}}<br />
-            运单号码：{{wlid}}
+            Express Company：{{wlname}}<br />
+            Express Reference Number：{{wlid}}
         </p>
-        <h3>实付金额</h3>
+        <h3>Total Price</h3>
         <p class="mat5">
-            <span class="strong num1 font14 cred">{{money}}</span>(元)
-            ＝ <span class="strong num1 font14 cred">{{productmoney}}</span>(商品价格)
-            ＋ <span class="strong num1 font14 cred">{{wlmoney}}</span>(运费)
+            <span class="strong num1 font14 cred">{{money}}</span>(￥)
+            ＝ <span class="strong num1 font14 cred">{{productmoney}}</span> (Products Price)
+            ＋ <span class="strong num1 font14 cred">{{wlmoney}}</span> (Express Fee)
         </p>
 
         {% else %}

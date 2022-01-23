@@ -2,47 +2,47 @@
 <div class="content">
     {% include "user/menu.html" %}
     <div class="fr huiyuan_main">
-        <h3 class="hy_rtt c666">订单编号： {{id}}</h3>
+        <h3 class="hy_rtt c666">Order Reference： {{id}}</h3>
         <div class="mat5 font13 zt">
-            <p class="c666"><span class="font12">{{atime|date('Y-m-d H:i')}}：</span><span class="cgreen">订单创建成功</span>，订单编号：{{id}}</p>
-            {# 货到付款 #}
+            <p class="c666"><span class="font12">{{atime|date('Y-m-d H:i')}}：</span><span class="cgreen">Order created successfully</span>, Order Reference：{{id}}</p>
+            {# Cash on delivery #}
             {% if payway == 3 %}
             {% if state == 1 %}
-            <p class="cred mat5 font12">等待卖家发货</p>
+            <p class="cred mat5 font12">Waiting for the seller to sent the goods</p>
             {% elseif state == 3%}
-            <p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">卖家已经发货</span>，快递单号：[{{wlid}}],
-                {% if wlname !=null %} {{wlname}} {% else %} 无需快递 {%endif%}
+            <p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">The seller has sent the goods</span>, Courier Number：[{{wlid}}],
+                {% if wlname !=null %} {{wlname}} {% else %} No need Express {%endif%}
             </p>
 
-            <p class="c666 mat5"> 等待买家付款</p>
+            <p class="c666 mat5"> Waiting for the buyer to pay</p>
 
             {% elseif state == 4 %}
-            <p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">卖家已经发货</span>，快递单号：[{{wlid}}],
-                {% if wlname !=null %} {{wlname}} {% else %} 无需快递 {%endif%}</p>
-            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">买家付款成功</span>，支付金额： {{money}}元</p>
-            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen strong">订单交易成功，欢迎下次光临！</span></p>
+            <p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">The seller has sent the goods</span>, Courier Number：[{{wlid}}],
+                {% if wlname !=null %} {{wlname}} {% else %} No need Express {%endif%}</p>
+            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">Buyer paid successfully</span>, Payment Amount： ￥{{money}}</p>
+            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen strong">Order completed, welcome to visit next time!</span></p>
             {% endif %}
-            {# 先款后货 #}
+            {# Pay after delivery #}
             {% elseif payway == 2%}
             {% if state == 1 %}
-            <p class="c666 mat5"> 等待买家付款</p>
+            <p class="c666 mat5"> Waiting for the buyer to pay</p>
             {% elseif state == 2%}
-            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">买家付款成功</span>，支付金额： {{money}}元</p>
-            <p class="cred mat5 font12">等待卖家发货</p>
+            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">Buyer paid successfully</span>, Payment Amount： ￥{{money}}</p>
+            <p class="cred mat5 font12">Waiting for the seller to sent the goods</p>
 
 
             {% elseif state == 3%}
-            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">买家付款成功</span>，支付金额： {{money}}元</p>
-            <p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">卖家已经发货</span>，快递单号：[{{wlid}}],
-                {% if wlname !=null %} {{wlname}} {% else %} 无需快递 {%endif%}</p>
-            <p class="cred mat5 font12">等待买家确认</p>
+            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">Buyer paid successfully</span>, Payment Amount： ￥{{money}}</p>
+            <p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">The seller has sent the goods</span>, Courier Number：[{{wlid}}],
+                {% if wlname !=null %} {{wlname}} {% else %} No need Express {%endif%}</p>
+            <p class="cred mat5 font12">Waiting for buyer confirmation</p>
 
             {% elseif state == 4%}
-            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">买家付款成功</span>，支付金额： {{money}}元</p>
+            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen">Buyer paid successfully</span>, Payment Amount： ￥{{money}}</p>
 
-            <p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">卖家已经发货</span>，快递单号：[{{wlid}}],
-                {% if wlname !=null %} {{wlname}} {% else %} 无需快递 {%endif%}</p>
-            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen strong">订单交易成功，欢迎下次光临！</span></p>
+            <p class="c666 mat5"><span class="font12">{{stime|date('Y-m-d H:i')}}：</span><span class="cgreen">The seller has sent the goods</span>, Courier Number：[{{wlid}}],
+                {% if wlname !=null %} {{wlname}} {% else %} No need Express {%endif%}</p>
+            <p class="c666 mat5"><span class="font12">{{ptime|date('Y-m-d H:i')}}：</span><span class="cgreen strong">Order completed, welcome to visit next time!</span></p>
 
 
             {% endif %}
@@ -65,9 +65,9 @@
         <div class="hy_table" style="margin-top:10px;">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="hy_tb_tt1">
                 <tr>
-                    <td class="bg_f8 font12" width="">商品详情</td>
-                    <td class="bg_f8 font12" width="120">商品单价(元)</td>
-                    <td class="bg_f8 font12" width="120">购买数量</td>
+                    <td class="bg_f8 font12" width="">Products</td>
+                    <td class="bg_f8 font12" width="120">Unit Price</td>
+                    <td class="bg_f8 font12" width="120">Quantity</td>
                 </tr>
             </table>
             <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-left:1px solid #ddd;">
@@ -89,33 +89,33 @@
                 {% endfor %}
             </table>
             <div class="ddxq_je font13">
-                应付总额：<span class="strong num1 font18 cred strong">{{money}}</span>(元) ＝
-                <span class="font14 cred num strong">{{productmoney}}</span>(商品总额)
-                ＋ <span class="font14 cred num strong">{{wlmoney}}</span>(运费)
+                Total Price：<span class="strong num1 font18 cred strong">{{money}}</span>(￥) ＝
+                <span class="font14 cred num strong">{{productmoney}}</span>(Products Price)
+                ＋ <span class="font14 cred num strong">{{wlmoney}}</span>(Express Fee)
             </div>
         </div>
         <div class="hy_table3">
-            <h3>收货信息</h3>
+            <h3>Receipt Information</h3>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td style="text-align:right" width="75">会员帐号：</td>
+                    <td style="text-align:right" width="75">Account：</td>
                     <td style="text-align:left" width="260">{{uname}}（ID：{{uid}}）</td>
-                    <td style="text-align:right" width="75">付款方式：</td>
+                    <td style="text-align:right" width="75">Payment：</td>
                     <td style="text-align:left">{{paywayarr[payway]}}</td>
                 </tr>
                 <tr>
-                    <td style="text-align:right">收货姓名：</td>
+                    <td style="text-align:right">Consignee：</td>
                     <td style="text-align:left">{{utname}}</td>
-                    <td style="text-align:right">联系电话：</td>
+                    <td style="text-align:right">Contact：</td>
                     <td style="text-align:left">{{uphone}}</td>
                 </tr>
                 <tr>
 
-                    <td style="text-align:right">收货地址：</td>
+                    <td style="text-align:right">Address：</td>
                     <td style="text-align:left" colspan="3">{{uaddress}}</td>
                 </tr>
                 <tr>
-                    <td style="text-align:right">买家留言：</td>
+                    <td style="text-align:right">Notes：</td>
                     <td style="text-align:left" colspan="3">{{content}}</td>
                 </tr>
             </table>
