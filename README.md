@@ -1,6 +1,17 @@
 # EShop_Establish_solution
 Web based E-Shop management system
 
+Sample UIs of whole project
+
+The Shop Platform
+<img width="596" alt="image" src="https://user-images.githubusercontent.com/94055197/227201826-89de36ae-db69-49e6-ac3c-6918b13e4b8f.png">
+
+Order progress and tracking
+<img width="649" alt="image" src="https://user-images.githubusercontent.com/94055197/227202026-724b7a2a-a73f-4700-9d41-f14fac205d43.png">
+
+
+
+
 **Background:**
 
 - Goal: enable consumer online shopping, online transactions between merchants, and related financial and comprehensive service activities
@@ -73,11 +84,25 @@ The general components
 
 <img width="798" alt="image" src="https://user-images.githubusercontent.com/94055197/226957993-6119ad23-bea6-4893-929e-57de284ffe02.png">
 
+The foreground components
 
+<img width="973" alt="image" src="https://user-images.githubusercontent.com/94055197/227200166-5abeadfe-4f50-4654-aea4-8de5111a3550.png">
 
+The background components
 
+<img width="972" alt="image" src="https://user-images.githubusercontent.com/94055197/227200323-1744295d-12b3-4085-afe5-bf90700dc5d9.png">
 
+A detailed sample - Customer account center
 
+<img width="971" alt="image" src="https://user-images.githubusercontent.com/94055197/227200506-6ec77f3c-61a8-4952-8c25-e55837991b06.png">
+
+A detailed sample - Admin Mgmt structure
+
+<img width="971" alt="image" src="https://user-images.githubusercontent.com/94055197/227200634-b37f89fe-6add-440b-97b3-fd383abcff56.png">
+
+The class diagram of ERD for Database
+
+<img width="735" alt="image" src="https://user-images.githubusercontent.com/94055197/227201019-299e339e-6113-4cc4-b08f-c047c8eb5ba8.png">
 
 
 
