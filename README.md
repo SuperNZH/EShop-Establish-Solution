@@ -1,9 +1,19 @@
 # EShop_Establish_solution
 Web based E-Shop management system
 
-In the open network environment, based on the browser/server application, buyers and sellers are not met for various business activities, realize consumer online shopping, online transactions between merchants and online electronic payment, as well as a variety of business activities, trading activities, a kind of financial activities and related comprehensive service activities of business model. So the design concept is built around this goal.
+**Background:**
 
-To solve the problem of merchants' costly software outsourcing, the proposed solution is for the government to provide a website construction plan. This would allow merchants to establish their own e-shop platform, customize their shopping mall and management system, and quickly establish their online shop with basic site information. The work is to design a system that enables the government to provide this solution to merchants in need.
+- Goal: enable consumer online shopping, online transactions between merchants, and related financial and comprehensive service activities
+- Environment: open network, browser/server application
+- Design concept built around the above goal
+- No physical meeting between buyers and sellers
+
+**Idea:**
+
+- Problem: costly software outsourcing for merchants
+- Proposed solution: government-provided website construction plan
+- Benefits: merchants can establish their own e-shop platform and customize it as per their requirements
+- A system needs to be designed for the government to provide this solution to merchants in need
 
 # Objectives
 * To study the different characteristics of the store or shop in real life and analyze what kind of features could be extracted and combined with a web system
