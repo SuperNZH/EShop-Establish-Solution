@@ -70,7 +70,9 @@ Below is the use case diagram of the project
 This document describes the two divisions of the E-shop management system: foreground for buyers and background for admins. The foreground allows buyers to browse, search, and buy goods, while the background allows admins to manage information and goods, process orders, and manage registered users.
 
 The general components
+
 <img width="798" alt="image" src="https://user-images.githubusercontent.com/94055197/226957993-6119ad23-bea6-4893-929e-57de284ffe02.png">
+
 
 
 
