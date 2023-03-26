@@ -82,27 +82,35 @@ Below is the use case diagram of the project
 # System Structure
 This document describes the two divisions of the E-shop management system: foreground for buyers and background for admins. The foreground allows buyers to browse, search, and buy goods, while the background allows admins to manage information and goods, process orders, and manage registered users.
 
-The general components
+## The general components
 
 <img width="798" alt="image" src="https://user-images.githubusercontent.com/94055197/226957993-6119ad23-bea6-4893-929e-57de284ffe02.png">
 
-The foreground components
+## The foreground components
 
 <img width="973" alt="image" src="https://user-images.githubusercontent.com/94055197/227200166-5abeadfe-4f50-4654-aea4-8de5111a3550.png">
 
-The background components
+## The background components
 
 <img width="972" alt="image" src="https://user-images.githubusercontent.com/94055197/227200323-1744295d-12b3-4085-afe5-bf90700dc5d9.png">
 
-A detailed sample - Customer account center
+## Customer account center
 
 <img width="971" alt="image" src="https://user-images.githubusercontent.com/94055197/227200506-6ec77f3c-61a8-4952-8c25-e55837991b06.png">
 
-A detailed sample - Admin Mgmt structure
+## Admin Mgmt structure
 
 <img width="971" alt="image" src="https://user-images.githubusercontent.com/94055197/227200634-b37f89fe-6add-440b-97b3-fd383abcff56.png">
 
-The class diagram of ERD for Database
+## Interaction between Foreground & Background
+
+<img width="521" alt="image" src="https://user-images.githubusercontent.com/94055197/227784204-ef34739b-4e6c-48a8-995f-ab7006d47606.png">
+
+## Order check process
+
+<img width="532" alt="image" src="https://user-images.githubusercontent.com/94055197/227784345-a7feebb5-a581-41a2-ad17-b057c7d8bd10.png">
+
+## The class diagram of ERD for Database
 
 <img width="735" alt="image" src="https://user-images.githubusercontent.com/94055197/227201019-299e339e-6113-4cc4-b08f-c047c8eb5ba8.png">
 
