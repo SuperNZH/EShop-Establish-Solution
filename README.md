@@ -114,5 +114,27 @@ This document describes the two divisions of the E-shop management system: foreg
 
 <img width="735" alt="image" src="https://user-images.githubusercontent.com/94055197/227201019-299e339e-6113-4cc4-b08f-c047c8eb5ba8.png">
 
+# Technical Implementation
+The project is mainly developed based on the MVC pattern. The following are the related environments and versions used in the project
 
+**Server Side**
+
+- Operating system: Windows 10
+- Web server: Apache 2.4.41
+- Database: MySQL 8.0.18
+- Server Language: PHP 7.4.0 (Packagist)
+
+**Client Side**
+
+- Browser: Chrome
+- Frontend: HTML and CSS
+- Page effect: JavaScript/jQuery/Ajax
+
+**Development Tools**
+
+- PHPStorm
+- WebStorm
+- MySQL Workbench
+- phpMyAdmin
+- WampServer
 
