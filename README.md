@@ -1,12 +1,14 @@
 # EShop_Establish_solution
 Web based E-Shop management system
 
-Sample UIs of whole project
+## Sample UIs of whole project
 
 The Shop Platform
+
 <img width="596" alt="image" src="https://user-images.githubusercontent.com/94055197/227201826-89de36ae-db69-49e6-ac3c-6918b13e4b8f.png">
 
 Order progress and tracking
+
 <img width="649" alt="image" src="https://user-images.githubusercontent.com/94055197/227202026-724b7a2a-a73f-4700-9d41-f14fac205d43.png">
 
 
